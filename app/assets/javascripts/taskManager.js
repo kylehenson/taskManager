@@ -17,17 +17,16 @@ $(document).ready(function() {
 
     var value = $(event.currentTarget).val();
     var taskId = $(this.parentElement).attr('data-id');
-    // var listId = $(this.parentElement).attr('data-list-id')
-    var taskStatus = null;
+    var taskStatus = "";
 
     if(value == 'incomplete') {
       $(this.parentElement).attr('data-status') = 'complete';
-      taskStatus = 'complete';
+      return taskStatus = 'complete';
     } else if(value == 'incomplete') {
       $(this.parentElement).attr('data-status') = 'incomplete';
-      taskStatus = 'incomplete';
+      return taskStatus = 'incomplete';
     };
-debugger;
+
     $.ajax({
       type: 'POST',
       url: '/change',

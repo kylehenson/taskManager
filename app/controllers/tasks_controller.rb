@@ -33,7 +33,6 @@ class TasksController < ApplicationController
   end
 
   def change_status
-    byebug
     @task = Task.find(params[:task_id].to_i)
     @task.status = params[:status]
     if @task.save
@@ -43,6 +42,13 @@ class TasksController < ApplicationController
     end
   end
 
+  def remove_image
+    task = Task.find(params[:task_id])
+    task.image = nil
+    task.save
+    redirect_to list_path(task.list_id)
+  end
+
   private
 
   def task_params
@@ -50,7 +56,8 @@ class TasksController < ApplicationController
                                  :notes,
                                  :status,
                                  :start_date,
-                                 :due_date)
+                                 :due_date,
+                                 :image)
   end
 
 end

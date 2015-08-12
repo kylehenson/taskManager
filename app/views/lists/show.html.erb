@@ -19,6 +19,8 @@
         <p class="due-date">Task Due Date: <%= task.due_date %></p>
         <p class="status">Task Status: <%= task.status %></p>
         <%= select_tag(:status, options_for_select([['incomplete'], ['complete']])) %>
+        <%= image_tag task.image.url(:thumb) %>
+        <%= link_to "Remove Image", remove_path(task_id: task.id), method: :delete %>
       </div>
     <% else %>
       <div class="task-element hidden" data-id="<%= task.id %>" data-list-id="<%= task.list_id %>" data-status="<%= task.status %>" data-date="<%= task.start_date %>">
@@ -28,6 +30,8 @@
         <p class="due-date">Task Due Date: <%= task.due_date %></p>
         <p class="status">Task Status: <%= task.status %></p>
         <%= select_tag(:status, options_for_select([['incomplete'], ['complete']])) %>
+        <%= image_tag task.image.url(:thumb) %>
+        <%= link_to "Remove Image", remove_path(task_id: task.id), method: :delete %>
       </div>
     <% end %>
   <% end %>
