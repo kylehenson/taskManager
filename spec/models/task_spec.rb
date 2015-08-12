@@ -43,7 +43,7 @@ RSpec.describe Task, type: :model do
     task = Task.create(title: 'hiking', notes: 'cool', start_date: Date.new(2015, 01, 31))
     task1 = Task.create(title: 'hiking', notes: 'cool', start_date: Date.new(2015, 9, 1))
 
-    expect(task.before_today?).to eq true
-    expect(task1.before_today?).to eq false
+    expect(task.before_today_and_incomplete?).to eq true
+    expect(task1.before_today_and_incomplete?).to eq false
   end
 end

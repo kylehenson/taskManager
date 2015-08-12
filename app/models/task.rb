@@ -3,7 +3,7 @@ class Task < ActiveRecord::Base
 
   validates :title, presence: true
   validate :start_date_cannot_be_in_the_past,
-           :due_date_cannot_be_in_the_past
+           :due_date_cannot_be_in_the_past, on: :create
 
   enum status: %w(incomplete complete)
 
@@ -19,8 +19,8 @@ class Task < ActiveRecord::Base
     end
   end
 
-  def before_today?
-    start_date < Date.today
+  def before_today_and_incomplete?
+    status == "incomplete" && start_date < Date.today
   end
 
 end
