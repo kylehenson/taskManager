@@ -2,6 +2,8 @@ class Task < ActiveRecord::Base
   belongs_to :list
 
   validates :title, presence: true
+  validate :start_date_cannot_be_in_the_past,
+           :due_date_cannot_be_in_the_past, on: :create
 
   enum status: %w(incomplete complete)
 
