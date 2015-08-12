@@ -1,11 +1,25 @@
 $(document).ready(function() {
+
+
+
   $("#completed-tasks").click(function () {
-    var allStatusSets = $("[id*='task-status']").each(function (i, el) {
-      if(this.textContent == ('Task Status: incomplete')) {
-        $(this).parents('div').fadeOut();
-      }
-    });
+    var allCompleteTaskDivs = $("[id*='task-complete']").each(function (i, el) {
+    }).parent('div');
+    $(allCompleteTaskDivs).toggle();
   });
+
+  $("#incomplete-tasks").click(function () {
+    var allIncompleteTaskDivs = $("[id*='task-incomplete']").each(function (i, el) {
+    }).parent('div');
+    $(allIncompleteTaskDivs).toggle();
+  });
+  // $("#completed-tasks").click(function () {
+  //   var allStatusSets = $("[id*='task-status']").each(function (i, el) {
+  //     if(this.textContent == ('Task Status: incomplete')) {
+  //       $(this).parent('div').fadeOut();
+  //     }
+  //   });
+  // });
 
   $("#incomplete-tasks").click(function () {
     var allStatusSets = $("[id*='task-status']").each(function (i, el) {

@@ -2,17 +2,17 @@
 <h3>List Description: <%= @list.description %></h3>
 
   <%= link_to 'Add Task', new_list_task_path(@list.id) %>
+  <button id="completed-tasks">Completed Tasks</button>
+  <button id="incomplete-tasks">Incomplete Tasks</button>
 
 <div class="tasks">
-  <button id="completed-tasks">Completed Tasks</button>
-
   <% @tasks.each do |task| %>
     <div class="task-element">
       <h4>Task Title: <%= link_to task.title, edit_list_task_path(id: task.id, list_id: @list.id) %></h4>
       <p>Task Notes: <%= task.notes %></p>
       <p>Task Start Date: <%= task.start_date %></p>
       <p>Task Due Date: <%= task.due_date %></p>
-      <p id="task-status">Task Status: <%= task.status %></p>
+      <p id="task-<%= task.status %>">Task Status: <%= task.status %></p>
       <%= select_tag(:status, options_for_select([['incomplete'], ['complete']])) %>
     </div>
   <% end %>
