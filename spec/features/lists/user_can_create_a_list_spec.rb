@@ -12,13 +12,13 @@ RSpec.describe "list creation" do
     expect(page).to have_content("Run")
   end
 
-  xit "cannot be created with invalid inputs" do
+  it "cannot be created with invalid inputs" do
     visit root_path
     click_link_or_button "Create a list"
     fill_in "Title", with: "Run"
     fill_in "Description", with: ""
     click_link_or_button "Submit"
 
-    expect(page).to have_content("Invalid")
+    expect(page).to have_content("Description can't be blank")
   end
 end

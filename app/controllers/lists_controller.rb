@@ -4,17 +4,22 @@ class ListsController < ApplicationController
     @lists = List.all
   end
 
+  def show
+    @list = List.find(params[:id])
+    @tasks = @list.tasks
+  end
+
   def new
     @list = List.new
   end
 
   def create
-    list = List.new(list_params)
-    if list.save
+    @list = List.new(list_params)
+    if @list.save
       flash[:notice] = "List successfully created"
       redirect_to lists_path
     else
-      flash[:errors] = list.errors.full_messages.join(', ')
+      flash[:errors] = @list.errors.full_messages.join(', ')
       render :new
     end
   end
@@ -24,11 +29,12 @@ class ListsController < ApplicationController
   end
 
   def update
-    list = List.find(params[:id])
-    if list.update(list_params)
+    @list = List.find(params[:id])
+    if @list.update(list_params)
       flash[:notice] = "Successfully updated list"
       redirect_to lists_path
     else
+      flash[:errors] = @list.errors.full_messages.join(', ')
       render :edit
     end
   end

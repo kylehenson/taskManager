@@ -1,0 +1,12 @@
+<h1>List Title: <%= @list.title %></h1>
+<h3>List Description: <%= @list.description %></h3>
+
+<%= link_to 'Add Task', new_list_task_path(@list.id) %>
+<% @tasks.each do |task| %>
+
+  <h4>Task Title: <%= link_to task.title, edit_list_task_path(id: task.id, list_id: @list.id) %></h4>
+  <p>Task Notes: <%= task.notes %></p>
+  <p>Task Start Date: <%= task.start_date %></p>
+  <p>Task Due Date: <%= task.due_date %></p>
+  <p>Task Status: <%= task.status %></p>
+<% end %>
