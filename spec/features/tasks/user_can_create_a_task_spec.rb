@@ -88,18 +88,4 @@ RSpec.describe "task creation", type: :feature do
     expect(page).to have_content "Due date can't be in the past"
   end
 
-  xit 'creates a task but does not display it unless the start date is prior to current date' do
-    visit root_path
-    click_link_or_button "Create a list"
-    fill_in 'Title', with: "Burritos"
-    fill_in 'Description', with: "yum"
-    click_link_or_button "Submit"
-    click_link_or_button "Burritos"
-    click_link_or_button "Add Task"
-    fill_in 'Title', with: "Chipotle"
-    fill_in 'Start date', with: Date.new(2015, 8, 12)
-    click_link_or_button "Submit"
-
-    expect(page).to_not have_content "Chipotle"
-  end
 end

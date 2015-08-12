@@ -4,16 +4,28 @@
   <%= link_to 'Add Task', new_list_task_path(@list.id) %>
   <button id="completed-tasks">Completed Tasks</button>
   <button id="incomplete-tasks">Incomplete Tasks</button>
+  <button id="future-tasks">Future Tasks</button>
 
 <div class="tasks">
   <% @tasks.each do |task| %>
-    <div class="task-element">
-      <h4>Task Title: <%= link_to task.title, edit_list_task_path(id: task.id, list_id: @list.id) %></h4>
-      <p>Task Notes: <%= task.notes %></p>
-      <p>Task Start Date: <%= task.start_date %></p>
-      <p>Task Due Date: <%= task.due_date %></p>
-      <p id="task-<%= task.status %>">Task Status: <%= task.status %></p>
-      <%= select_tag(:status, options_for_select([['incomplete'], ['complete']])) %>
-    </div>
+    <% if task.before_today? %>
+      <div class="task-element" data-status="<%= task.status %>" data-date="<%= task.start_date %>">
+        <h4>Task Title: <%= link_to task.title, edit_list_task_path(id: task.id, list_id: @list.id) %></h4>
+        <p>Task Notes: <%= task.notes %></p>
+        <p>Task Start Date: <%= task.start_date %></p>
+        <p>Task Due Date: <%= task.due_date %></p>
+        <p>Task Status: <%= task.status %></p>
+        <%= select_tag(:status, options_for_select([['incomplete'], ['complete']])) %>
+      </div>
+    <% else %>
+      <div class="task-element hidden" data-status="<%= task.status %>" data-date="<%= task.start_date %>">
+        <h4>Task Title: <%= link_to task.title, edit_list_task_path(id: task.id, list_id: @list.id) %></h4>
+        <p>Task Notes: <%= task.notes %></p>
+        <p>Task Start Date: <%= task.start_date %></p>
+        <p>Task Due Date: <%= task.due_date %></p>
+        <p>Task Status: <%= task.status %></p>
+        <%= select_tag(:status, options_for_select([['incomplete'], ['complete']])) %>
+      </div>
+    <% end %>
   <% end %>
 </div>

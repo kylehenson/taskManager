@@ -19,4 +19,8 @@ class Task < ActiveRecord::Base
     end
   end
 
+  def before_today?
+    start_date < Date.today
+  end
+
 end
