@@ -32,6 +32,17 @@ class TasksController < ApplicationController
     end
   end
 
+  def change_status
+    byebug
+    @task = Task.find(params[:task_id].to_i)
+    @task.status = params[:status]
+    if @task.save
+      respond_with @task
+    else
+      respond_with({:errors => @task.errors}, :status => 422, :location => tasks_path)
+    end
+  end
+
   private
 
   def task_params

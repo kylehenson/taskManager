@@ -5,5 +5,5 @@ Rails.application.routes.draw do
     resources :tasks
   end
 
-  post '/status_update', to: 'task#update_status'
+  post "/change", to: "tasks#change_status"
 end

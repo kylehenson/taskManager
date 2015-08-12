@@ -14,13 +14,25 @@ $(document).ready(function() {
 
   $('select').on('change', function(event) {
     event.preventDefault();
-    var value = $(event.currentTarget).val()
-    var taskId = $(this.parentElement).attr('data-id')
-    var listId = $(this.parentElement).attr('data-list-id')
+
+    var value = $(event.currentTarget).val();
+    var taskId = $(this.parentElement).attr('data-id');
+    // var listId = $(this.parentElement).attr('data-list-id')
+    var taskStatus = null;
+
+    if(value == 'incomplete') {
+      $(this.parentElement).attr('data-status') = 'complete';
+      taskStatus = 'complete';
+    } else if(value == 'incomplete') {
+      $(this.parentElement).attr('data-status') = 'incomplete';
+      taskStatus = 'incomplete';
+    };
+debugger;
     $.ajax({
       type: 'POST',
       url: '/change',
-      data: { task: {task_id: taskId, status: value }}
+      dataType: 'json',
+      data: { 'task_id': taskId, 'status': taskStatus }
     })
   });
 
@@ -31,13 +43,13 @@ $(document).ready(function() {
         $(this.parentElement).fadeIn();
       });
     } else {
-      $(".task-title").each(function(){
-        if ($(this).text().search(new RegExp(text, "i")) < 0) {
-            $(this.parentElement).fadeOut();
-        } else {
-            $(this).show();
-        }
-      });
+    $(".task-title").each(function(){
+      if ($(this).text().search(new RegExp(text, "i")) < 0) {
+          $(this.parentElement).fadeOut();
+      } else {
+          $(this).show();
+      }
+    });
     }
   });
 
@@ -48,13 +60,13 @@ $(document).ready(function() {
         $(this.parentElement).fadeIn();
       });
     } else {
-      $(".due-date").each(function(){
-        if ($(this).text().search(new RegExp(text, "i")) < 0) {
-            $(this.parentElement).fadeOut();
-        } else {
-            $(this).show();
-        }
-      });
+    $(".due-date").each(function(){
+      if ($(this).text().search(new RegExp(text, "i")) < 0) {
+          $(this.parentElement).fadeOut();
+      } else {
+          $(this).show();
+      }
+    });
     }
   });
 
