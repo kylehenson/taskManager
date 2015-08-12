@@ -1,0 +1,18 @@
+<h1>Edit Your Task:</h1>
+
+<%= form_for(@task, url: list_task_path(@task.list_id, @task.id), method: 'patch') do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :notes %>
+  <%= f.text_field :notes %>
+  <%= f.label :start_date %>
+  <%= f.date_field :start_date %>
+  <%= f.label :due_date %>
+  <%= f.date_field :due_date %>
+  <%= f.select(:status) do %>
+    <% [['incomplete'], ['complete']].each do |c| -%>
+      <%= content_tag(:option, c.first, value: c.last) %>
+    <% end %>
+  <% end %>
+  <%= f.submit "Submit" %>
+<% end %>
