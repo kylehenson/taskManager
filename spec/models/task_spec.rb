@@ -38,4 +38,12 @@ RSpec.describe Task, type: :model do
     expect(task1).to be_valid
     expect(task1.due_date.to_s).to eq "2015-09-30"
   end
+
+  it 'filters tasks before current date and after' do
+    task = Task.create(title: 'hiking', notes: 'cool', start_date: Date.new(2015, 01, 31))
+    task1 = Task.create(title: 'hiking', notes: 'cool', start_date: Date.new(2015, 9, 1))
+
+    expect(task.before_today_and_incomplete?).to eq true
+    expect(task1.before_today_and_incomplete?).to eq false
+  end
 end

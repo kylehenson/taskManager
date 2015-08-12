@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   resources :lists do
     resources :tasks
   end
+
+  post '/status_update', to: 'task#update_status'
 end

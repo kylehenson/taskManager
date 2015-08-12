@@ -9,10 +9,5 @@
   <%= f.date_field :start_date %>
   <%= f.label :due_date %>
   <%= f.date_field :due_date %>
-  <%= f.select(:status) do %>
-    <% [['incomplete'], ['complete']].each do |c| -%>
-      <%= content_tag(:option, c.first, value: c.last) %>
-    <% end %>
-  <% end %>
   <%= f.submit "Submit" %>
 <% end %>
